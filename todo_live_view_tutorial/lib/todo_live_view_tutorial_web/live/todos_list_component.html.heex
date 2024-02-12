@@ -1,0 +1,21 @@
+<div>
+  <ul>
+    <%= for item <- @items do %>
+      <li id={"item-#{item.id}"}>
+        <.input
+          field={item.completed}
+          value=""
+          type="checkbox"
+          label="Completed"
+          name="completed"
+        />
+        <p class="todo_item">
+          <%= item.text %>
+        </p>
+        <button class="delete_btn">
+          Delete
+        </button>
+      </li>
+    <% end %>
+  </ul>
+</div>
