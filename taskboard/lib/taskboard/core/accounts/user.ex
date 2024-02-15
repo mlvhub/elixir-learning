@@ -8,6 +8,9 @@ defmodule Taskboard.Core.Accounts.User do
     field(:hashed_password, :string, redact: true)
     field(:confirmed_at, :naive_datetime)
 
+    # add the foreign_key here to ensure the custom association name works
+    has_many :projects, Project, foreign_key: :owner_id
+
     timestamps(type: :utc_datetime)
   end
 

@@ -8,6 +8,7 @@ defmodule Taskboard.Core.Accounts do
 
   alias Taskboard.Core.Accounts.{User, UserToken, UserNotifier}
 
+  def list_users, do: Repo.all(User)
   ## Database getters
 
   @doc """
