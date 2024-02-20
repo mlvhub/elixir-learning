@@ -17,9 +17,7 @@ defmodule Taskboard.Core.Projects do
       [%Project{}, ...]
 
   """
-  def list_projects do
-    Repo.all(Project)
-  end
+  def list_projects, do: Project |> Repo.all() |> Repo.preload(:owner)
 
   @doc """
   Gets a single project.
@@ -35,8 +33,12 @@ defmodule Taskboard.Core.Projects do
       ** (Ecto.NoResultsError)
 
   """
-  def get_project!(id), do: Repo.get!(Project, id)
+  def get_project!(id), do: Project |> Repo.get!(id) |> Repo.preload(:owner)
 
+  @spec create_project(
+          :invalid
+          | %{optional(:__struct__) => none(), optional(atom() | binary()) => any()}
+        ) :: any()
   @doc """
   Creates a project.
 

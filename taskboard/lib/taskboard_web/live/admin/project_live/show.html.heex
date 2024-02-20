@@ -11,11 +11,17 @@
 <.list>
   <:item title="Title"><%= @project.title %></:item>
   <:item title="Description"><%= @project.description %></:item>
+  <:item title="Owner"><%= @project.owner.email %></:item>
 </.list>
 
 <.back navigate={~p"/admin/projects"}>Back to projects</.back>
 
-<.modal :if={@live_action == :edit} id="project-modal" show on_cancel={JS.patch(~p"/admin/projects/#{@project}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="project-modal"
+  show
+  on_cancel={JS.patch(~p"/admin/projects/#{@project}")}
+>
   <.live_component
     module={TaskboardWeb.Admin.ProjectLive.FormComponent}
     id={@project.id}
