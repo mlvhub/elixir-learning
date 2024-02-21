@@ -6,10 +6,11 @@ defmodule TaskboardWeb.Components.NavigationBar do
     <header class="absolute sticky inset-x-0 top-0 z-50 bg-slate-100">
       <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
+          <!-- link to homepage -->
           <.link href={~p"/"} class="-m-1.5 p-1.5">
             <span class="sr-only">TaskBoard</span>
-            <!-- Logo -->
-            <img class="h-8 w-auto" src={~p"/images/task.png"} alt="logo" />
+            <!-- the site logo in the navbar -->
+            <img class="h-8 w-auto" src={~p"/images/logo.png"} alt="logo" />
           </.link>
         </div>
         <!-- hamburger menu button -->

@@ -3,3 +3,6 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+.nav-link {
+    @apply text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-blue-700
+}
