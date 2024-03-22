@@ -5,7 +5,12 @@ defmodule PentoWeb.ProductLiveTest do
   import Pento.CatalogFixtures
 
   @create_attrs %{name: "some name", description: "some description", unit_price: 120.5, sku: 42}
-  @update_attrs %{name: "some updated name", description: "some updated description", unit_price: 456.7, sku: 43}
+  @update_attrs %{
+    name: "some updated name",
+    description: "some updated description",
+    unit_price: 456.7,
+    sku: 43
+  }
   @invalid_attrs %{name: nil, description: nil, unit_price: nil, sku: nil}
 
   defp create_product(_) do
@@ -14,7 +19,7 @@ defmodule PentoWeb.ProductLiveTest do
   end
 
   describe "Index" do
-    setup [:create_product]
+    setup [:create_product, :register_and_log_in_user]
 
     test "lists all products", %{conn: conn, product: product} do
       {:ok, _index_live, html} = live(conn, ~p"/products")
@@ -78,7 +83,7 @@ defmodule PentoWeb.ProductLiveTest do
   end
 
   describe "Show" do
-    setup [:create_product]
+    setup [:create_product, :register_and_log_in_user]
 
     test "displays product", %{conn: conn, product: product} do
       {:ok, _show_live, html} = live(conn, ~p"/products/#{product}")
