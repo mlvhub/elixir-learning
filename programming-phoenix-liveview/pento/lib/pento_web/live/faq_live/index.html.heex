@@ -1,0 +1,62 @@
+<.header>
+  Listing Faq
+  <:actions>
+    <.link patch={~p"/faq/new"}>
+      <.button>New Faq</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="faq"
+  rows={@streams.faq_collection}
+  row_click={fn {_id, faq} -> JS.navigate(~p"/faq/#{faq}") end}
+>
+  <:col :let={{_id, faq}} label="Question"><%= faq.question %></:col>
+  <:col :let={{_id, faq}} label="Answer"><%= faq.answer %></:col>
+  <:col :let={{_id, faq}} label="Vote"><%= faq.vote %></:col>
+  <:action :let={{_id, faq}}>
+    <button
+      phx-click={JS.push("upvote_faq", value: %{id: faq.id})}
+      type="button"
+      class="-m-3 flex-none p-3 opacity-20 hover:opacity-40"
+      aria-label={gettext("close")}
+    >
+      <.icon name="hero-arrow-up" class="h-5 w-5" />
+    </button>
+    <button
+      phx-click="downvote_faq"
+      phx-value-id={faq.id}
+      type="button"
+      class="-m-3 flex-none p-3 opacity-20 hover:opacity-40"
+      aria-label={gettext("close")}
+    >
+      <.icon name="hero-arrow-down" class="h-5 w-5" />
+    </button>
+  </:action>
+  <:action :let={{_id, faq}}>
+    <div class="sr-only">
+      <.link navigate={~p"/faq/#{faq}"}>Show</.link>
+    </div>
+    <.link patch={~p"/faq/#{faq}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, faq}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: faq.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="faq-modal" show on_cancel={JS.patch(~p"/faq")}>
+  <.live_component
+    module={PentoWeb.FaqLive.FormComponent}
+    id={@faq.id || :new}
+    title={@page_title}
+    action={@live_action}
+    faq={@faq}
+    patch={~p"/faq"}
+  />
+</.modal>

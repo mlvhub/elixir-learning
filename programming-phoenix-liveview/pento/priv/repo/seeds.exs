@@ -10,6 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 alias Pento.Catalog
+alias Pento.Faqs
 
 products = [
   %{
@@ -34,4 +35,21 @@ products = [
 
 Enum.each(products, fn product ->
   Catalog.create_product(product)
+end)
+
+faqs = [
+  %{
+    question: "How to order the query by a field?",
+    answer: "`Repo.all(from f in Faq, order_by: [desc: f.vote])`",
+    vote: 0
+  },
+  %{
+    question: "Can you name the context and the schema with the same name?",
+    answer: "No.",
+    vote: 0
+  }
+]
+
+Enum.each(faqs, fn faq ->
+  Faqs.create_faq(faq)
 end)

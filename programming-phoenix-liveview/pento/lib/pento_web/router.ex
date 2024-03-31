@@ -71,12 +71,21 @@ defmodule PentoWeb.Router do
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       live "/guess", WrongLive
 
+      # products
       live "/products", ProductLive.Index, :index
       live "/products/new", ProductLive.Index, :new
       live "/products/:id/edit", ProductLive.Index, :edit
 
       live "/products/:id", ProductLive.Show, :show
       live "/products/:id/show/edit", ProductLive.Show, :edit
+
+      # FAQ
+      live "/faq", FaqLive.Index, :index
+      live "/faq/new", FaqLive.Index, :new
+      live "/faq/:id/edit", FaqLive.Index, :edit
+
+      live "/faq/:id", FaqLive.Show, :show
+      live "/faq/:id/show/edit", FaqLive.Show, :edit
     end
   end
 
